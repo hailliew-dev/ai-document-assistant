@@ -18,7 +18,7 @@ Frontend:
 ## Running locally
 ### Create virtual environment
 `cd backend`
-`python -m venv ./venv` or `python3 -m venv venv`
+`python -m venv venv` or `python3 -m venv venv`
 ### Activate virtual environment
 #### macOS/Linux:
 `source venv/bin/activate`
