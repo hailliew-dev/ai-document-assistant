@@ -27,7 +27,7 @@ Frontend:
 ### Install dependencies
 `pip install -r requirements.txt`
 ### Run development server
-From `/backend`: 
+`cd backend`
 `uvicorn main:app --reload`
 
 The API should now be available locally at:
