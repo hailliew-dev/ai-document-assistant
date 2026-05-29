@@ -5,12 +5,15 @@ Full-stack, AI-powered document assistant. Supports document upload, summary-gen
 - Generate AI-powered summaries
 - Ask questions about uploaded content
 - Use retrieval-based AI (RAG architecture)
+## Goals
+This project is being built to:
+- Learn production AI engineering workflows
+- Explore LLM integrations and retrieval systems
 ## Tech Stack
 Backend:
 - Python
 - FastAPI
 - OpenAI API
-
 Frontend:
 - React
 - TypeScript
@@ -38,9 +41,24 @@ Interactive API docs:
 
 http://127.0.0.1:8000/docs
 
-## Goals
-
-This project is being built to:
-
-- Learn production AI engineering workflows
-- Explore LLM integrations and retrieval systems
+## Backend Structure
+```
+backend/
+│
+├── app/
+│   ├── main.py
+│   ├── routes/
+│   ├── services/
+│   ├── models/
+│   └── utils/
+│
+├── requirements.txt
+└── .env
+```
+### Structure Overview
+- routes/ — API route handlers and endpoints
+- services/ — business logic and AI workflows
+- models/ — application data models and schemas
+- utils/ — shared helper utilities
+- main.py — backend application entrypoint
+- .env — backend environment variables
