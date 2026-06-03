@@ -1,15 +1,15 @@
 # AI Document Assistant
 Full-stack, AI-powered document assistant. Supports document upload, summary-generation, and question answering via LLM integration.
-## What this will do
+## 💡 What this will do
 - Upload and store documents
 - Generate AI-powered summaries
 - Ask questions about uploaded content
 - Use retrieval-based AI (RAG architecture)
-## Goals
+## 🥅 Goals
 This project is being built to:
 - Learn production AI engineering workflows
 - Explore LLM integrations and retrieval systems
-## Tech Stack
+## ⚙️ Tech Stack
 Backend:
 - Python
 - FastAPI
@@ -18,7 +18,7 @@ Frontend:
 - React
 - TypeScript
 
-## Running locally
+## ♠️ Running locally
 ### Create virtual environment
 `cd backend`
 `python -m venv venv` or `python3 -m venv venv`
@@ -31,15 +31,26 @@ Frontend:
 `pip install -r requirements.txt`
 ### Run development server
 `cd backend`
-`uvicorn main:app --reload`
+`uvicorn app.main:app --reload`
+
+## ♣️ Running with Docker
+This project includes a Dockerfile for running the backend in a reproducible containerized environment.
+#### Build command
+```
+docker build -t ai-doc-assist:initial .
+```
+#### Run command
+```
+docker run -d -p 127.0.0.1:8000:8000 ai-doc-assist:initial
+```
 
 The API should now be available locally at:
 
-http://127.0.0.1:8000/health
+http://localhost:8000/health
 
 Interactive API docs:
 
-http://127.0.0.1:8000/docs
+http://localhost:8000/docs
 
 ## Backend Structure
 ```
