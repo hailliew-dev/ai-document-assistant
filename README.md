@@ -52,7 +52,22 @@ Interactive API docs:
 
 http://localhost:8000/docs
 
-## Backend Structure
+## Project Structure
+```
+ai-document-assistant/
+│
+├── backend/
+├── frontend/
+├── .gitignore
+└── README.md
+```
+#### Structure Overview
+- backend/ - backend system for app functionality
+- frontend/ - frontend system for user interface
+- .gitignore - specifies files to remain untracked
+- README.md - main application documentation
+
+### Backend Structure
 ```
 backend/
 │
@@ -66,10 +81,26 @@ backend/
 ├── requirements.txt
 └── .env
 ```
-### Structure Overview
-- routes/ — API route handlers and endpoints
-- services/ — business logic and AI workflows
-- models/ — application data models and schemas
-- utils/ — shared helper utilities
-- main.py — backend application entrypoint
-- .env — backend environment variables
+#### Structure Overview
+- routes/ - API route handlers and endpoints
+- services/ - business logic and AI workflows
+- models/ - application data models and schemas
+- utils/ - shared helper utilities
+- main.py - backend application entrypoint
+- .env - backend environment variables
+
+### Frontend Structure
+```
+frontend/
+│
+├── src/
+│   ├── app/
+│       ├── globals.css
+│       ├── layout.tsx
+│       ├── page.tsx
+```
+#### Structure Overview
+- src/app/ - entry point for frontend source code
+- globals.css - styles to go across all pages
+- layout.tsx - UI layout to go across all pages
+- page.tsx - homepage of application
