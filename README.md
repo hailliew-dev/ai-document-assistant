@@ -104,3 +104,9 @@ frontend/
 - globals.css - styles to go across all pages
 - layout.tsx - UI layout to go across all pages
 - page.tsx - homepage of application
+
+## Current utilities
+`text_utils.py`
+Functions:
+- `clean_text()`
+- `word_count()`
