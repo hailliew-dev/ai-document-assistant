@@ -1,0 +1,1 @@
+Programs become easier to reason about when things have designated homes.
