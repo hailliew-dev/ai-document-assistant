@@ -9,7 +9,7 @@ Full-stack, AI-powered document assistant. Supports document upload, summary-gen
 This project is being built to:
 - Learn production AI engineering workflows
 - Explore LLM integrations and retrieval systems
-## Current Capabilities
+## ✅ Current Capabilities
 - Read `.txt` files
 - Calculate word counts
 - Save metadata as JSON

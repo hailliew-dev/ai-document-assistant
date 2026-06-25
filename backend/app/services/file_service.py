@@ -7,13 +7,14 @@ def read_file(file_path: str) -> str:
         with open(file_path) as f:
             content = f.read()
     except OSError as e:
-        print(e)
+        print(f'Error reading file: {e}')
+        raise
     return content
 
 # create metadata
-def create_metadata(content: str) -> dict:
+def create_metadata(content: str, filename: str) -> dict:
     metadata = {
-        'filename': 'example.txt',
+        'filename': filename,
         'word_count': word_count(content)
     }
     return metadata
@@ -24,10 +25,10 @@ def save_metadata(metadata: dict, file_path: str) -> None:
         with open(file_path, 'w') as f:
             json.dump(metadata, f)
     except OSError as e:
-        print(e)
+        print(f'Error saving metadata: {e}')
 
-input_file = 'uploads/example.txt'
-output_file = 'metadata/example.json'
-content = read_file(input_file)
-metadata = create_metadata(content)
-save_metadata(metadata, output_file)
+input_file = 'example.txt'
+output_file = 'example.json'
+content = read_file(f'uploads/{input_file}')
+metadata = create_metadata(content, input_file)
+save_metadata(metadata, f'metadata/{output_file}')
