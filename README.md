@@ -9,6 +9,11 @@ Full-stack, AI-powered document assistant. Supports document upload, summary-gen
 This project is being built to:
 - Learn production AI engineering workflows
 - Explore LLM integrations and retrieval systems
+## Current Capabilities
+- Read `.txt` files
+- Calculate word counts
+- Save metadata as JSON
+- Handle file-related exceptions
 ## ⚙️ Tech Stack
 Backend:
 - Python
@@ -77,7 +82,10 @@ backend/
 │   ├── services/
 │   ├── models/
 │   └── utils/
-│
+├── uploads/
+│   ├── example.txt
+├── metadata/
+│   ├── example.json
 ├── requirements.txt
 └── .env
 ```
