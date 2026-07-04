@@ -8,6 +8,7 @@ def clean_text(text: str) -> str:
 def word_count(text: str) -> int:
     return len(text.split())
 
+# Testing
 if __name__ == "__main__":
     print("Hello world")
     print(repr(clean_text("Hello world")))
