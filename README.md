@@ -10,9 +10,11 @@ This project is being built to:
 - Learn production AI engineering workflows
 - Explore LLM integrations and retrieval systems
 ## ✅ Current Capabilities
-- Read `.txt` files
+- Take  `.txt` files as client upload
+- Read internal or external `.txt` files
 - Calculate word counts
-- Save metadata as JSON
+- Save external `.txt` files
+- Save file metadata as JSON, return file metadata to client
 - Handle file-related exceptions
 ## ⚙️ Tech Stack
 Backend:
@@ -51,11 +53,22 @@ docker run -d -p 127.0.0.1:8000:8000 ai-doc-assist:initial
 
 The API should now be available locally at:
 
-http://localhost:8000/health
+http://localhost:8000
 
-Interactive API docs:
+## 🔻 API Endpoints 
+### GET `/health`
+Returns service status.
 
-http://localhost:8000/docs
+### POST `/upload`
+Accepts `.txt` files.
+
+Returns:
+
+- filename
+- word count
+
+### `/docs`
+Interactive API docs.
 
 ## Project Structure
 ```
@@ -114,7 +127,13 @@ frontend/
 - page.tsx - homepage of application
 
 ## Current utilities
-`text_utils.py`
+`utils/text_utils.py`
 Functions:
-- `clean_text()`
-- `word_count()`
+- `clean_text()` - Cleans text of extra spaces, preserving capitalization, puncutation, and newlines
+- `word_count()` - Returns word count
+
+`services/file_service.py`
+Functions:
+- `read_file()` - Reads file contents
+- `create_metadata()` - Creates metadata dictionary for filename and word count
+- `save_metadata()` - Saves metadata to JSON file in `metadata/`
