@@ -1,10 +1,13 @@
 from fastapi import APIRouter, UploadFile
+from app.models.upload_models import UploadResponseModel
 from app.services.file_service import create_metadata
 
 router = APIRouter()
 
+# HTTPExceptions will be added later
+
 @router.post("/upload")
-async def upload(upload_file: UploadFile):
+async def upload(upload_file: UploadFile) -> UploadResponseModel | dict:
     # accept .txt files
     if not upload_file.filename.endswith(".txt"):
         return {"Error": "Only .txt files are allowed"}
@@ -23,6 +26,7 @@ async def upload(upload_file: UploadFile):
     except Exception as e:
         print({"Error": f"Failed to save file: {e}"})
         raise
-    # return filename and word count metadata
+    # return metadata
     else:
-        return create_metadata(upload_file_content, upload_file.filename)
+        metadata = create_metadata(upload_file_content, upload_file.filename)
+        return UploadResponseModel(**metadata)
