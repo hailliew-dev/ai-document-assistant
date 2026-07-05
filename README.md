@@ -16,6 +16,7 @@ This project is being built to:
 - Save external `.txt` files
 - Save file metadata as JSON, return file metadata to client
 - Handle file-related exceptions
+- Get file names of all input/uploaded documents
 ## ⚙️ Tech Stack
 Backend:
 - Python
@@ -63,9 +64,12 @@ Returns service status.
 Accepts `.txt` files.
 
 Returns:
-
 - filename
 - word count
+
+### GET `/documents`
+Returns:
+- List of input/uploaded files
 
 ### `/docs`
 Interactive API docs.
