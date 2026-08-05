@@ -8,20 +8,20 @@ router = APIRouter()
 # HTTPExceptions will be added later
 
 @router.post("/upload", response_model=UploadDocumentResponse)
-async def upload(upload_file: UploadFile) -> UploadDocumentResponse | dict:
+def upload(upload_file: UploadFile) -> UploadDocumentResponse | dict:
     # accept .txt files
     if not upload_file.filename.endswith(".txt"):
         return {"Error": "Only .txt files are allowed"}
     # read the file
     try:
-        upload_file_content = await upload_file.read()
+        upload_file_content = upload_file.file.read()
     except Exception as e:
         return {'Error': f"Failed to read file: {e}"}
     # return metadata
     else:
         metadata = create_metadata(upload_file_content, upload_file.filename)
         try:
-            metadataResponse = await upload_service(metadata)
+            metadataResponse = upload_service(metadata)
         except Exception as e:
             print({"Error": f"Failed to save metadata to database: {e}"})
             raise

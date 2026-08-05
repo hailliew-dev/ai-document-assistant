@@ -5,8 +5,16 @@ from app.models.db.document_model import Base
 
 load_dotenv()
 
+database_url = os.getenv("SQLALCHEMY_DATABASE_URL")
+
+if not database_url:
+    raise RuntimeError(
+        "SQLALCHEMY_DATABASE_URL environment variable is not configured"
+    )
+
 engine = create_engine(
-    os.getenv("SQLALCHEMY_DATABASE_URL"), 
-    echo=False)
+    database_url, 
+    echo=False
+)
 
 Base.metadata.create_all(engine)
