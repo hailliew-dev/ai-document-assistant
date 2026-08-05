@@ -63,7 +63,7 @@ Returns service status.
 Accepts `.txt` files.
 Returns document metadata.
 
-### `/docs`
+### GET `/docs`
 Interactive API docs.
 Use this to test `/upload` endpoint.
 
@@ -104,7 +104,7 @@ backend/
 - utils/ - shared helper utilities
 - database.py - PostgreSQL database connection file
 - requirements.txt - installed dependencies
-- .env - backend environment variables
+- .env.example - backend environment variable example
 
 ### 📊 Database Setup
 #### Database Stack
