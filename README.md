@@ -1,27 +1,26 @@
 # AI Document Assistant
 Full-stack, AI-powered document assistant. Supports document upload, summary-generation, and question answering via LLM integration.
-## 💡 What this will do
-- Upload and store documents
-- Generate AI-powered summaries
-- Ask questions about uploaded content
-- Use retrieval-based AI (RAG architecture)
 ## 🥅 Goals
 This project is being built to:
 - Learn production AI engineering workflows
 - Explore LLM integrations and retrieval systems
 ## ✅ Current Capabilities
-- Take  `.txt` files as client upload
-- Read internal or external `.txt` files
+- Accept  `.txt` files uploads
+- Read uploaded `.txt` files
 - Calculate word counts
-- Save external `.txt` files
-- Save file metadata as JSON, return file metadata to client
-- Handle file-related exceptions
-- Get file names of all input/uploaded documents
+- Save uploaded file metadata (currently, not file contents) to database
+- Return file metadata to client
+## 💡 Planned Capabilities
+- Upload and store documents
+- Generate AI-powered summaries
+- Ask questions about uploaded content
+- Use retrieval-based AI (RAG architecture)
 ## ⚙️ Tech Stack
 Backend:
 - Python
 - FastAPI
 - OpenAI API
+- PostgreSQL (+ SQLAlchemy, psycopg)
 Frontend:
 - React
 - TypeScript
@@ -38,10 +37,10 @@ Frontend:
 ### Install dependencies
 `pip install -r requirements.txt`
 ### Run development server
-`cd backend`
 `uvicorn app.main:app --reload`
 
 ## ♣️ Running with Docker
+*NOTE: Updated Dockerfile is pending database persistence changes*
 This project includes a Dockerfile for running the backend in a reproducible containerized environment.
 #### Build command
 ```
@@ -62,19 +61,13 @@ Returns service status.
 
 ### POST `/upload`
 Accepts `.txt` files.
-
-Returns:
-- filename
-- word count
-
-### GET `/documents`
-Returns:
-- List of input/uploaded files
+Returns document metadata.
 
 ### `/docs`
 Interactive API docs.
+Use this to test `/upload` endpoint.
 
-## Project Structure
+## 🏛️ Project Structure
 ```
 ai-document-assistant/
 │
@@ -89,7 +82,7 @@ ai-document-assistant/
 - .gitignore - specifies files to remain untracked
 - README.md - main application documentation
 
-### Backend Structure
+### 🔙 Backend Structure
 ```
 backend/
 │
@@ -98,23 +91,52 @@ backend/
 │   ├── routes/
 │   ├── services/
 │   ├── models/
-│   └── utils/
-├── uploads/
-│   ├── example.txt
-├── metadata/
-│   ├── example.json
+│   ├── utils/
+│   └── database.py
 ├── requirements.txt
-└── .env
+└── .env.example
 ```
 #### Structure Overview
+- main.py - backend application entry point
 - routes/ - API route handlers and endpoints
 - services/ - business logic and AI workflows
 - models/ - application data models and schemas
 - utils/ - shared helper utilities
-- main.py - backend application entrypoint
+- database.py - PostgreSQL database connection file
+- requirements.txt - installed dependencies
 - .env - backend environment variables
 
-### Frontend Structure
+### 📊 Database Setup
+#### Database Stack
+- PostgreSQL - relational database that stores document records
+- SQLAlchemy - maps Python models to database tables and manages database sessions and transactions
+- psycopg - provides the PostgreSQL driver used by SQLAlchemy
+#### Document Table
+Column - Description
+- id - Unique identifier for the document record
+- filename - Original uploaded filename
+- word_count - Calculated number of words in the document
+- upload_time - Time the record was created
+The current implementation stores document metadata rather than the uploaded file contents.
+#### Environment Configuration
+Create a `.env` file and provide a PostgreSQL connection URL:
+`SQLALCHEMY_DATABASE_URL=postgresql+psycopg://USERNAME:PASSWORD@localhost:5432/DATABASE_NAME`
+#### Persistence Flow
+When a document is uploaded, the application:
+- reads and processes the document;
+- calculates its metadata;
+- creates a SQLAlchemy document record;
+- commits the record to PostgreSQL; and
+- returns the stored document information in the API response.
+
+#### Verifying Persistence
+After uploading documents, connect to PostgreSQL and run:
+
+`SELECT * FROM documents;`
+
+The records should remain present after the FastAPI server is stopped and restarted.
+
+### ➡️ Frontend Structure
 ```
 frontend/
 │
@@ -130,7 +152,7 @@ frontend/
 - layout.tsx - UI layout to go across all pages
 - page.tsx - homepage of application
 
-## Current utilities
+## Current utilities & services
 `utils/text_utils.py`
 Functions:
 - `clean_text()` - Cleans text of extra spaces, preserving capitalization, puncutation, and newlines
@@ -140,4 +162,7 @@ Functions:
 Functions:
 - `read_file()` - Reads file contents
 - `create_metadata()` - Creates metadata dictionary for filename and word count
-- `save_metadata()` - Saves metadata to JSON file in `metadata/`
+
+`services/upload_service.py`
+Functions:
+- `upload_service()` - Saves document metadata to database
