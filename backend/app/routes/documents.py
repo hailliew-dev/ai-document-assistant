@@ -1,11 +1,15 @@
+from app.services.get_documents_service import get_all_documents
 from fastapi import APIRouter
 from pathlib import Path
-# from app.models.documents_model import ListDocumentsModel
+from app.models.documents_model import ListDocumentsModel
 
 router = APIRouter()
 
-documents_path = Path("uploads/")
+@router.get("/documents", response_model=ListDocumentsModel)
+def get_documents():
+    try:
+        documents = get_all_documents()
+    except Exception as e:
+        return {"Error getting all documents": str(e)}
 
-@router.get("/documents")
-async def get_documents():
-    return {'status': 'ok'}
+    return {"documents": documents}
