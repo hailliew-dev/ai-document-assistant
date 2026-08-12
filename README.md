@@ -10,8 +10,10 @@ This project is being built to:
 - Calculate word counts
 - Save uploaded file metadata (currently, not file contents) to database
 - Return file metadata to client
+- Retrieve all uploaded documents (metadata)
+- Retrieve one uploaded document (metadata)
 ## 💡 Planned Capabilities
-- Upload and store documents
+✅ ~~- Upload and store documents~~
 - Generate AI-powered summaries
 - Ask questions about uploaded content
 - Use retrieval-based AI (RAG architecture)
@@ -66,6 +68,12 @@ Returns document metadata.
 ### GET `/docs`
 Interactive API docs.
 Use this to test `/upload` endpoint.
+
+### GET `/documents`
+Returns all documents.
+
+### GET `/document{id}`
+Returns one document's metadata by ID.
 
 ## 🏛️ Project Structure
 ```
@@ -166,3 +174,8 @@ Functions:
 `services/upload_service.py`
 Functions:
 - `upload_service()` - Saves document metadata to database
+
+`services/get_documets_service`
+Functions:
+- `get_documents()` - Returns all document metadata
+- `get_one_document()` - Returns one document's metadata by ID
